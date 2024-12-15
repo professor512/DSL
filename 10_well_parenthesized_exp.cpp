@@ -1,39 +1,43 @@
-#include <iostream>
-#include <stack>
+// In any language program mostly syntax error occurs due to unbalancing
+// delimiter such as (),{},[]. Write C++ program using stack to check whether given 
+// expression is well parenthesized or not.
+
+#include<iostream>
+#include<stack>
 using namespace std;
 
-// Function to check if the given expression is well parenthesized
-bool isWellParenthesized(const string& expression) {
-    stack<char> s;
-    for (char ch : expression) {
-        if (ch == '(' || ch == '{' || ch == '[') {
+bool well_parenthesized(const string& str){
+    stack<char>s;
+    for(char ch: str){
+        if(ch == '(' || ch == '[' || ch == '{')
             s.push(ch);
-        } else if (ch == ')' || ch == '}' || ch == ']') {
-            if (s.empty()) {
+            
+        else if(ch == ')' || ch == ']' || ch == '}'){
+            if(s.empty())
                 return false;
-            }
             char top = s.top();
-            if ((ch == ')' && top != '(') ||
-                (ch == '}' && top != '{') ||
-                (ch == ']' && top != '[')) {
-                return false;
-            }
+            if((ch == ')' && top != '(') || 
+                (ch == ']' && top != '[') ||
+                (ch == '}' && top != '{')){
+                    return false;
+                }
             s.pop();
         }
     }
     return s.empty();
 }
 
-int main() {
+int main(){
+    
     string expression;
-    cout << "Enter an expression: ";
+    cout<<"\nEnter an Expression: ";
     getline(cin, expression);
-
-    if (isWellParenthesized(expression)) {
-        cout << "The given expression is well parenthesized." << endl;
-    } else {
-        cout << "The given expression is not well parenthesized." << endl;
-    }
-
+    
+    if(well_parenthesized(expression))
+        cout<<"\nThe expression is well parethensized";
+    else
+        cout<<"\nThe expression is not well parenthezied";
+    
     return 0;
+    
 }
